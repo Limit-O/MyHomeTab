@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyHomeTab</title>
+
+    <!-- ===== 外部样式 ===== -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- ===== Font Awesome 图标库 ===== -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <!-- ===== Google Font: Inter ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- ============================================================
+    HTML 结构
+    ============================================================ -->
+    <div class="home">
+
+        <!-- ===== 标题 ===== -->
+        <header class="brand">
+            <div class="logo-icon">
+                <i class="fas fa-command"></i>
+            </div>
+            <div class="title-text">My<span>Home</span>Tab</div>
+        </header>
+
+        <!-- ===== 搜索栏 ===== -->
+        <div class="search-wrapper">
+            <input
+            type="text"
+            id="searchInput"
+            placeholder="输入关键词，用 Bing 探索…"
+            autofocus
+            />
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        <div class="search-hint">
+            <kbd>⌘</kbd> + <kbd>K</kbd> 快速聚焦
+        </div>
+
+        <!-- ===== 分隔 ===== -->
+        <div class="divider">
+            <span class="line"></span>
+            <span class="dot"></span>
+            <span class="line-right"></span>
+        </div>
+
+        <!-- ===== 书签 ===== -->
+        <section class="bookmarks-section">
+            <div class="bookmarks-header">
+                <span class="left">
+                    <i class="fas fa-bookmark"></i> 我的书签
+                </span>
+            </div>
+
+            <!-- 书签网格 -->
+            <div id="bookmarksGrid" class="bookmarks-grid">
+                <!-- 由 JavaScript 动态渲染 -->
+            </div>
+
+            <!-- 添加书签：折叠 -->
+            <div class="add-bookmark-toggle">
+                <button class="toggle-btn" id="toggleAddBtn">
+                    <i class="fas fa-plus" id="toggleIcon"></i> 添加书签
+                </button>
+            </div>
+
+            <div class="add-bookmark-panel" id="addPanel">
+                <div class="add-bookmark-form">
+                    <input
+                    type="text"
+                    id="newBookmarkName"
+                    placeholder="名称"
+                    maxlength="30"
+                    />
+                    <input
+                    type="text"
+                    id="newBookmarkUrl"
+                    placeholder="网址"
+                    />
+                    <button class="add-btn" id="addBookmarkBtn">
+                        <i class="fas fa-plus"></i> 添加
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ===== 外部 JavaScript ===== -->
+    <script src="script.js"></script>
+</body>
+</html>
