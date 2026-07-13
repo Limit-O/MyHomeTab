@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "MyHomeTab",
-  "version": "0.1",
+  "version": "1.0",
   "description": "将MyHomeTab(绛衣虹人制作)设为新标签页",
   "chrome_url_overrides": {
     "newtab": "index.html"
