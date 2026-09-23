@@ -1,9 +1,31 @@
 {
   "manifest_version": 3,
   "name": "MyHomeTab",
-  "version": "1.0",
-  "description": "将MyHomeTab(绛衣虹人制作)设为新标签页",
+  "version": "2.2.0",
+  "description": "用你自己的 HTML 作为新标签页",
   "chrome_url_overrides": {
     "newtab": "index.html"
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "MyHomeTab 设置"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'",
+    "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals allow-downloads; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:; style-src 'self' 'unsafe-inline' https: http:; img-src 'self' data: blob: https: http:; font-src 'self' data: https: http:; media-src 'self' data: blob: https: http:; connect-src 'self' data: blob: https: http:; frame-src https: http:"
   }
 }

@@ -1,42 +1,192 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MyHomeTab</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新标签页</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: #070a10;
+    color: #e6ebf5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  #frame, #default {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #frame { border: 0; display: block; }
+  #frame[hidden], #default[hidden] { display: none; }
+
+  /* ---------- 默认界面 ---------- */
+  #default {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at 50% 0%, #131a2a 0%, #070a10 65%);
+    user-select: none;
+  }
+
+  .clock {
+    font-size: 96px;
+    font-weight: 200;
+    letter-spacing: 4px;
+    color: #f0f4fc;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(120, 160, 255, .18);
+  }
+  .date {
+    margin-top: 14px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #6b7385;
+  }
+
+  .search {
+    margin-top: 48px;
+    width: min(600px, 82vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .engines {
+    display: flex;
+    gap: 6px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.05);
+  }
+  .engine {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    color: #5a6376;
+    font-size: 12.5px;
+    font-family: inherit;
+    letter-spacing: .6px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: .18s;
+  }
+  .engine:hover { color: #8a93a6; }
+  .engine.active {
+    color: #dbe3f0;
+    background: rgba(120, 160, 255, .12);
+    box-shadow: inset 0 0 0 1px rgba(120, 160, 255, .18);
+  }
+
+  .search input {
+    width: 100%;
+    padding: 16px 24px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: rgba(255,255,255,.03);
+    color: #e6ebf5;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: .25s;
+    text-align: center;
+    letter-spacing: .5px;
+  }
+  .search input::placeholder {
+    color: #4b5468;
+    letter-spacing: 2px;
+  }
+  .search input:focus {
+    border-color: rgba(120, 160, 255, .3);
+    background: rgba(255,255,255,.05);
+    box-shadow: 0 0 0 4px rgba(120, 160, 255, .06);
+  }
+
+  .links {
+    margin-top: 40px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 24px;
+  }
+  .links a {
+    padding: 9px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.05);
+    background: rgba(255,255,255,.02);
+    color: #8a93a6;
+    font-size: 13px;
+    text-decoration: none;
+    transition: .2s;
+    letter-spacing: .5px;
+  }
+  .links a:hover {
+    color: #dbe3f0;
+    border-color: rgba(255,255,255,.14);
+    background: rgba(255,255,255,.05);
+    transform: translateY(-2px);
+  }
+
+  .hint {
+    position: fixed;
+    bottom: 22px;
+    font-size: 11.5px;
+    color: #3d4557;
+    letter-spacing: 1.2px;
+  }
+
+  @media (max-width: 600px) {
+    .clock { font-size: 64px; letter-spacing: 2px; }
+    .date { font-size: 12px; }
+    .search { margin-top: 36px; gap: 12px; }
+    .engine { padding: 5px 12px; font-size: 12px; }
+    .search input { padding: 13px 18px; font-size: 14px; }
+    .links { margin-top: 28px; gap: 8px; }
+    .links a { padding: 8px 14px; font-size: 12px; }
+    .hint { font-size: 10.5px; }
+  }
+</style>
 </head>
 <body>
-  <!-- Canvas 粒子背景 -->
-  <canvas id="bgCanvas"></canvas>
+  <!-- 默认界面（未设置自定义 HTML 时显示） -->
+  <div id="default">
+    <div class="clock" id="clock">--:--</div>
+    <div class="date" id="date"></div>
 
-  <main class="container">
-    <!-- 书签网格 -->
-    <section class="bookmarks-section">
-      <div id="bookmarksGrid" class="bookmarks-grid"></div>
-    </section>
-
-    <!-- 添加书签（折叠） -->
-    <div class="add-section">
-      <button class="add-toggle" id="toggleAddBtn">
-        <i class="fas fa-plus" id="toggleIcon"></i>
-        <span>添加书签</span>
-      </button>
-      <div class="add-panel" id="addPanel">
-        <div class="add-form">
-          <input type="text" id="newBookmarkName" placeholder="名称" maxlength="30" autocomplete="off" />
-          <input type="text" id="newBookmarkUrl" placeholder="网址" autocomplete="off" />
-          <button class="add-btn" id="addBookmarkBtn"><i class="fas fa-plus"></i> 添加</button>
-        </div>
+    <form class="search" id="searchForm">
+      <div class="engines" id="engines">
+        <button type="button" class="engine active" data-engine="bing">Bing</button>
+        <button type="button" class="engine" data-engine="baidu">百度</button>
+        <button type="button" class="engine" data-engine="google">Google</button>
       </div>
-    </div>
-    <!-- 页脚已移除 -->
-  </main>
+      <input type="text" id="q" placeholder="搜索" autocomplete="off" spellcheck="false">
+    </form>
 
-  <script src="script.js"></script>
+    <div class="links">
+      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.zhihu.com" target="_blank" rel="noopener">知乎</a>
+      <a href="https://www.bilibili.com" target="_blank" rel="noopener">Bilibili</a>
+      <a href="https://juejin.cn" target="_blank" rel="noopener">掘金</a>
+      <a href="https://www.cnblogs.com" target="_blank" rel="noopener">博客园</a>
+    </div>
+
+    <div class="hint">点击工具栏的 MyHomeTab 图标，可替换此界面</div>
+  </div>
+
+  <!-- 用户自定义 HTML 的渲染容器 -->
+  <iframe id="frame" src="sandbox.html" hidden
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"></iframe>
+
+  <script src="index.js"></script>
 </body>
 </html>

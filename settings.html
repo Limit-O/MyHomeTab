@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyHomeTab · 设置</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; padding: 32px;
+    background: #0a0e15; color: #dbe3f0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  main { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+
+  header h1 { margin: 0 0 6px; font-size: 20px; font-weight: 500; letter-spacing: .5px; }
+  header p  { margin: 0; font-size: 13px; color: #7c869a; line-height: 1.7; }
+  header code {
+    padding: 1px 6px; border-radius: 4px;
+    background: rgba(255,255,255,.06); color: #9dbdff;
+    font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 12px;
+  }
+
+  .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .spacer { flex: 1; }
+
+  .btn {
+    display: inline-flex; align-items: center;
+    padding: 9px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(255,255,255,.04);
+    color: #cdd6e4;
+    font-size: 13px; font-family: inherit;
+    cursor: pointer; transition: .18s;
+  }
+  .btn:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+  .btn.primary {
+    background: rgba(96,150,255,.16);
+    border-color: rgba(96,150,255,.35);
+    color: #9dbdff;
+  }
+  .btn.primary:hover { background: rgba(96,150,255,.26); }
+  .btn.ghost { color: #8b93a4; }
+
+  textarea {
+    width: 100%;
+    min-height: 60vh;
+    padding: 16px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: #0d131c;
+    color: #c9d4e6;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    transition: border-color .2s;
+    tab-size: 2;
+  }
+  textarea:focus { border-color: rgba(96,150,255,.35); }
+
+  .status { margin: 0; min-height: 18px; font-size: 12.5px; color: #6fb28b; }
+  .status.error { color: #e28282; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>MyHomeTab 设置</h1>
+    <p>
+      粘贴或上传一个完整的 HTML 文件，保存后打开新标签页即可看到效果。<br>
+      留空则使用内置的默认界面（时钟 + 搜索 + 常用链接）。
+    </p>
+  </header>
+
+  <div class="toolbar">
+    <label class="btn">
+      <input type="file" id="fileInput" accept=".html,.htm,text/html" hidden>
+      上传 HTML 文件
+    </label>
+    <button class="btn" id="downloadBtn">导出当前</button>
+    <span class="spacer"></span>
+    <button class="btn ghost" id="clearBtn">恢复默认界面</button>
+    <button class="btn primary" id="saveBtn">保存</button>
+  </div>
+
+  <textarea id="editor" spellcheck="false" placeholder="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;/head&gt;
+  &lt;body style=&quot;margin:0;height:100vh;display:grid;place-items:center;background:#0b0f16;color:#e6ebf5;font-family:system-ui&quot;&gt;
+    &lt;h1&gt;Hello, new tab.&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;"></textarea>
+
+  <p id="status" class="status"></p>
+</main>
+<script src="settings.js"></script>
+</body>
+</html>
