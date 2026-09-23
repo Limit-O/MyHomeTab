@@ -67,14 +67,15 @@ MyHomeTab 是一个轻量的 Chrome 扩展，它不再内置固定的书签界�
 ---
 
 ## 目录结构  
-MyHomeTab/
-├── manifest.json # 扩展配置
-├── index.html # 新标签页：默认界面 + 沙盒容器
-├── index.js # 时钟 / 搜索 / 界面切换逻辑
-├── background.js # 点击工具栏图标 → 打开设置
-├── sandbox.html # 沙盒渲染器
-├── settings.html # 设置页
-└── settings.js
+
+MyHomeTab/  
+├── manifest.json # 扩展配置  
+├── index.html # 新标签页：默认界面 + 沙盒容器  
+├── index.js # 时钟 / 搜索 / 界面切换逻辑  
+├── background.js # 点击工具栏图标 → 打开设置  
+├── sandbox.html # 沙盒渲染器  
+├── settings.html # 设置页  
+└── settings.js  
 
 ---
 
