@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "MyHomeTab",
+  "name": "The-Tab",
   "version": "2.2.0",
   "description": "用你自己的 HTML 作为新标签页",
   "chrome_url_overrides": {
@@ -11,7 +11,7 @@
     "open_in_tab": true
   },
   "action": {
-    "default_title": "MyHomeTab 设置"
+    "default_title": "The-Tab 设置"
   },
   "background": {
     "service_worker": "background.js"

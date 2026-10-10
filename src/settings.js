@@ -69,7 +69,7 @@ downloadBtn.addEventListener('click', () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'myhometab.html';
+    a.download = 'the-tab.html';
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
