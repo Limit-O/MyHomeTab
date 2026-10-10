@@ -1,0 +1,113 @@
+{
+  "extensionName": {
+    "message": "The-Tab"
+  },
+  "extensionDescription": {
+    "message": "Use your own HTML as the new tab page"
+  },
+  "actionTitle": {
+    "message": "The-Tab Settings"
+  },
+  "pageTitle": {
+    "message": "The-Tab · Settings"
+  },
+  "pageDescription": {
+    "message": "Paste or upload a complete HTML file, and save to see the effect on your new tab page. Leave empty to use the built-in default interface (clock + search + common links)."
+  },
+  "uploadButton": {
+    "message": "Upload HTML File"
+  },
+  "exportButton": {
+    "message": "Export Current"
+  },
+  "clearButton": {
+    "message": "Restore Default Interface"
+  },
+  "saveButton": {
+    "message": "Save"
+  },
+  "statusLoaded": {
+    "message": "Loaded $filename$, click \"Save\" to apply",
+    "placeholders": {
+      "filename": {
+        "content": "$1",
+        "example": "index.html"
+      }
+    }
+  },
+  "statusLoadFailed": {
+    "message": "Failed to read file"
+  },
+  "statusEmpty": {
+    "message": "Content is empty. To use the default interface, click \"Restore Default Interface\""
+  },
+  "statusTooLarge": {
+    "message": "Content exceeds 8MB, please simplify before saving"
+  },
+  "statusSaveFailed": {
+    "message": "Save failed: $error$",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Error message"
+      }
+    }
+  },
+  "statusSaved": {
+    "message": "Saved ✓ Open a new tab to see the effect"
+  },
+  "statusCleared": {
+    "message": "Restored default interface"
+  },
+  "statusNoContent": {
+    "message": "No content to export"
+  },
+  "confirmClear": {
+    "message": "Restore default interface? Current custom content will be cleared."
+  },
+  "downloadFilename": {
+    "message": "the-tab.html"
+  },
+  "hint": {
+    "message": "Click the The-Tab icon in the toolbar to replace this interface"
+  },
+  "searchPlaceholder": {
+    "message": "Search"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineBaidu": {
+    "message": "Baidu"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "linksGitHub": {
+    "message": "GitHub"
+  },
+  "linksZhihu": {
+    "message": "Zhihu"
+  },
+  "linksBilibili": {
+    "message": "Bilibili"
+  },
+  "linksJuejin": {
+    "message": "Juejin"
+  },
+  "linksBlog": {
+    "message": "CNBlogs"
+  },
+  "languageTitle": {
+    "message": "Language"
+  },
+  "languageZh": {
+    "message": "简体中文"
+  },
+  "languageEn": {
+    "message": "English"
+  },
+  "languageReset": {
+    "message": "Reset to Default"
+  }
+}

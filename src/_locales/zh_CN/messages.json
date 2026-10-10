@@ -1,0 +1,113 @@
+{
+  "extensionName": {
+    "message": "The-Tab"
+  },
+  "extensionDescription": {
+    "message": "用你自己的 HTML 作为新标签页"
+  },
+  "actionTitle": {
+    "message": "The-Tab 设置"
+  },
+  "pageTitle": {
+    "message": "The-Tab · 设置"
+  },
+  "pageDescription": {
+    "message": "粘贴或上传一个完整的 HTML 文件，保存后打开新标签页即可看到效果。留空则使用内置的默认界面（时钟 + 搜索 + 常用链接）。"
+  },
+  "uploadButton": {
+    "message": "上传 HTML 文件"
+  },
+  "exportButton": {
+    "message": "导出当前"
+  },
+  "clearButton": {
+    "message": "恢复默认界面"
+  },
+  "saveButton": {
+    "message": "保存"
+  },
+  "statusLoaded": {
+    "message": "已载入 $filename$，点击「保存」生效",
+    "placeholders": {
+      "filename": {
+        "content": "$1",
+        "example": "index.html"
+      }
+    }
+  },
+  "statusLoadFailed": {
+    "message": "读取文件失败"
+  },
+  "statusEmpty": {
+    "message": "内容为空，若要使用默认界面请点击「恢复默认界面」"
+  },
+  "statusTooLarge": {
+    "message": "内容超过 8MB，请精简后再保存"
+  },
+  "statusSaveFailed": {
+    "message": "保存失败：$error$",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Error message"
+      }
+    }
+  },
+  "statusSaved": {
+    "message": "已保存 ✓ 打开新标签页看看效果"
+  },
+  "statusCleared": {
+    "message": "已恢复默认界面"
+  },
+  "statusNoContent": {
+    "message": "当前没有内容可导出"
+  },
+  "confirmClear": {
+    "message": "恢复默认界面？当前自定义内容将被清空。"
+  },
+  "downloadFilename": {
+    "message": "the-tab.html"
+  },
+  "hint": {
+    "message": "点击工具栏的 The-Tab 图标，可替换此界面"
+  },
+  "searchPlaceholder": {
+    "message": "搜索"
+  },
+  "engineBing": {
+    "message": "Bing"
+  },
+  "engineBaidu": {
+    "message": "百度"
+  },
+  "engineGoogle": {
+    "message": "Google"
+  },
+  "linksGitHub": {
+    "message": "GitHub"
+  },
+  "linksZhihu": {
+    "message": "知乎"
+  },
+  "linksBilibili": {
+    "message": "Bilibili"
+  },
+  "linksJuejin": {
+    "message": "掘金"
+  },
+  "linksBlog": {
+    "message": "博客园"
+  },
+  "languageTitle": {
+    "message": "语言"
+  },
+  "languageZh": {
+    "message": "简体中文"
+  },
+  "languageEn": {
+    "message": "English"
+  },
+  "languageReset": {
+    "message": "重置为默认"
+  }
+}

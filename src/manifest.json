@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "The-Tab",
+  "name": "__MSG_extensionName__",
   "version": "2.2.0",
-  "description": "用你自己的 HTML 作为新标签页",
+  "description": "__MSG_extensionDescription__",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
@@ -11,7 +11,7 @@
     "open_in_tab": true
   },
   "action": {
-    "default_title": "The-Tab 设置"
+    "default_title": "__MSG_actionTitle__"
   },
   "background": {
     "service_worker": "background.js"
@@ -24,6 +24,7 @@
       "sandbox.html"
     ]
   },
+  "default_locale": "zh_CN",
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'",
     "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals allow-downloads; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:; style-src 'self' 'unsafe-inline' https: http:; img-src 'self' data: blob: https: http:; font-src 'self' data: https: http:; media-src 'self' data: blob: https: http:; connect-src 'self' data: blob: https: http:; frame-src https: http:"

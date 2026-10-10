@@ -2,6 +2,15 @@
 const clockEl = document.getElementById('clock');
 const dateEl = document.getElementById('date');
 
+function updateLanguage() {
+  const messages = chrome.i18n.getMessage;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const text = messages(key);
+    if (text) el.textContent = text;
+  });
+}
+
 function pad(n) {
   return String(n).padStart(2, '0');
 }
@@ -87,4 +96,11 @@ chrome.storage.local.get({ userHtml: '' }, (data) => {
 chrome.storage.onChanged.addListener((changes, area) => {
   if (area !== 'local' || !changes.userHtml) return;
   applyHtml(changes.userHtml.newValue || '');
+});
+
+// 语言切换
+chrome.storage.local.get({ language: 'zh_CN' }, (data) => {
+  const lang = data.language || 'zh_CN';
+  document.documentElement.lang = lang;
+  updateLanguage();
 });

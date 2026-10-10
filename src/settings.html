@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The-Tab · 设置</title>
+<title data-i18n="pageTitle">The-Tab · 设置</title>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -69,22 +69,31 @@
 <body>
 <main>
   <header>
-    <h1>The-Tab 设置</h1>
+    <h1 data-i18n="pageTitle">The-Tab 设置</h1>
     <p>
-      粘贴或上传一个完整的 HTML 文件，保存后打开新标签页即可看到效果。<br>
-      留空则使用内置的默认界面（时钟 + 搜索 + 常用链接）。
+      <span data-i18n="pageDescription">粘贴或上传一个完整的 HTML 文件，保存后打开新标签页即可看到效果。<br>
+      留空则使用内置的默认界面（时钟 + 搜索 + 常用链接）。</span>
     </p>
   </header>
 
   <div class="toolbar">
     <label class="btn">
       <input type="file" id="fileInput" accept=".html,.htm,text/html" hidden>
-      上传 HTML 文件
+      <span data-i18n="uploadButton">上传 HTML 文件</span>
     </label>
-    <button class="btn" id="downloadBtn">导出当前</button>
+    <button class="btn" id="downloadBtn"><span data-i18n="exportButton">导出当前</span></button>
     <span class="spacer"></span>
-    <button class="btn ghost" id="clearBtn">恢复默认界面</button>
-    <button class="btn primary" id="saveBtn">保存</button>
+    <button class="btn ghost" id="clearBtn"><span data-i18n="clearButton">恢复默认界面</span></button>
+    <button class="btn primary" id="saveBtn"><span data-i18n="saveButton">保存</span></button>
+  </div>
+
+  <div class="toolbar" style="margin-top: 12px;">
+    <span style="font-size: 13px; color: #8b93a4;"><span data-i18n="languageTitle">语言</span></span>
+    <select id="languageSelect" style="padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.04); color: #cdd6e4; font-size: 13px; font-family: inherit; outline: none;">
+      <option value="zh_CN"><span data-i18n="languageZh">简体中文</span></option>
+      <option value="en"><span data-i18n="languageEn">English</span></option>
+    </select>
+    <button class="btn ghost" id="resetLanguageBtn" style="font-size: 12px; padding: 6px 12px;"><span data-i18n="languageReset">重置为默认</span></button>
   </div>
 
   <textarea id="editor" spellcheck="false" placeholder="&lt;!DOCTYPE html&gt;

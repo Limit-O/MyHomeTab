@@ -4,9 +4,12 @@ const saveBtn = document.getElementById('saveBtn');
 const clearBtn = document.getElementById('clearBtn');
 const downloadBtn = document.getElementById('downloadBtn');
 const statusEl = document.getElementById('status');
+const languageSelect = document.getElementById('languageSelect');
+const resetLanguageBtn = document.getElementById('resetLanguageBtn');
 
 const STORAGE_KEY = 'userHtml';
 const MAX_BYTES = 8 * 1024 * 1024;
+const LANGUAGE_KEY = 'language';
 
 let statusTimer = null;
 function setStatus(text, isError) {
@@ -16,8 +19,38 @@ function setStatus(text, isError) {
   if (text) statusTimer = setTimeout(() => { statusEl.textContent = ''; }, 3200);
 }
 
+function updateLanguage() {
+  const messages = chrome.i18n.getMessage;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const text = messages(key);
+    if (text) el.textContent = text;
+  });
+}
+
 chrome.storage.local.get({ [STORAGE_KEY]: '' }, (data) => {
   editor.value = data[STORAGE_KEY] || '';
+});
+
+chrome.storage.local.get({ [LANGUAGE_KEY]: 'zh_CN' }, (data) => {
+  languageSelect.value = data[LANGUAGE_KEY] || 'zh_CN';
+  updateLanguage();
+});
+
+languageSelect.addEventListener('change', () => {
+  const lang = languageSelect.value;
+  chrome.storage.local.set({ [LANGUAGE_KEY]: lang }, () => {
+    updateLanguage();
+    setStatus('语言已切换');
+  });
+});
+
+resetLanguageBtn.addEventListener('click', () => {
+  chrome.storage.local.set({ [LANGUAGE_KEY]: 'zh_CN' }, () => {
+    languageSelect.value = 'zh_CN';
+    updateLanguage();
+    setStatus('已重置为默认语言');
+  });
 });
 
 fileInput.addEventListener('change', () => {
@@ -27,9 +60,9 @@ fileInput.addEventListener('change', () => {
   const reader = new FileReader();
   reader.onload = () => {
     editor.value = String(reader.result || '');
-    setStatus('已载入 ' + file.name + '，点击「保存」生效');
+    setStatus(chrome.i18n.getMessage('statusLoaded', [file.name]));
   };
-  reader.onerror = () => setStatus('读取文件失败', true);
+  reader.onerror = () => setStatus(chrome.i18n.getMessage('statusLoadFailed'), true);
   reader.readAsText(file, 'utf-8');
   fileInput.value = '';
 });
@@ -37,39 +70,39 @@ fileInput.addEventListener('change', () => {
 saveBtn.addEventListener('click', () => {
   const html = editor.value;
   if (!html.trim()) {
-    setStatus('内容为空，若要使用默认界面请点击「恢复默认界面」', true);
+    setStatus(chrome.i18n.getMessage('statusEmpty'), true);
     return;
   }
   if (html.length > MAX_BYTES) {
-    setStatus('内容超过 8MB，请精简后再保存', true);
+    setStatus(chrome.i18n.getMessage('statusTooLarge'), true);
     return;
   }
   chrome.storage.local.set({ [STORAGE_KEY]: html }, () => {
     if (chrome.runtime.lastError) {
-      setStatus('保存失败：' + chrome.runtime.lastError.message, true);
+      setStatus(chrome.i18n.getMessage('statusSaveFailed', [chrome.runtime.lastError.message]), true);
       return;
     }
-    setStatus('已保存 ✓ 打开新标签页看看效果');
+    setStatus(chrome.i18n.getMessage('statusSaved'));
   });
 });
 
 clearBtn.addEventListener('click', () => {
-  if (!confirm('恢复默认界面？当前自定义内容将被清空。')) return;
+  if (!confirm(chrome.i18n.getMessage('confirmClear'))) return;
   editor.value = '';
-  chrome.storage.local.set({ [STORAGE_KEY]: '' }, () => setStatus('已恢复默认界面'));
+  chrome.storage.local.set({ [STORAGE_KEY]: '' }, () => setStatus(chrome.i18n.getMessage('statusCleared')));
 });
 
 downloadBtn.addEventListener('click', () => {
   const html = editor.value;
   if (!html.trim()) {
-    setStatus('当前没有内容可导出', true);
+    setStatus(chrome.i18n.getMessage('statusNoContent'), true);
     return;
   }
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-    a.download = 'the-tab.html';
+  a.download = chrome.i18n.getMessage('downloadFilename');
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 });

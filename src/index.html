@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>新标签页</title>
+<script>
+  // 简单的语言切换逻辑
+  const STORAGE_KEY = 'language';
+  function updateLanguage() {
+    chrome.storage.local.get({ [STORAGE_KEY]: 'zh_CN' }, (data) => {
+      const lang = data[STORAGE_KEY] || 'zh_CN';
+      document.documentElement.lang = lang;
+    });
+  }
+  updateLanguage();
+</script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -165,22 +176,22 @@
 
     <form class="search" id="searchForm">
       <div class="engines" id="engines">
-        <button type="button" class="engine active" data-engine="bing">Bing</button>
-        <button type="button" class="engine" data-engine="baidu">百度</button>
-        <button type="button" class="engine" data-engine="google">Google</button>
+        <button type="button" class="engine active" data-engine="bing"><span data-i18n="engineBing">Bing</span></button>
+        <button type="button" class="engine" data-engine="baidu"><span data-i18n="engineBaidu">百度</span></button>
+        <button type="button" class="engine" data-engine="google"><span data-i18n="engineGoogle">Google</span></button>
       </div>
-      <input type="text" id="q" placeholder="搜索" autocomplete="off" spellcheck="false">
+      <input type="text" id="q" placeholder="搜索" autocomplete="off" spellcheck="false" data-i18n-placeholder="searchPlaceholder">
     </form>
 
     <div class="links">
-      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.zhihu.com" target="_blank" rel="noopener">知乎</a>
-      <a href="https://www.bilibili.com" target="_blank" rel="noopener">Bilibili</a>
-      <a href="https://juejin.cn" target="_blank" rel="noopener">掘金</a>
-      <a href="https://www.cnblogs.com" target="_blank" rel="noopener">博客园</a>
+      <a href="https://github.com" target="_blank" rel="noopener"><span data-i18n="linksGitHub">GitHub</span></a>
+      <a href="https://www.zhihu.com" target="_blank" rel="noopener"><span data-i18n="linksZhihu">知乎</span></a>
+      <a href="https://www.bilibili.com" target="_blank" rel="noopener"><span data-i18n="linksBilibili">Bilibili</span></a>
+      <a href="https://juejin.cn" target="_blank" rel="noopener"><span data-i18n="linksJuejin">掘金</span></a>
+      <a href="https://www.cnblogs.com" target="_blank" rel="noopener"><span data-i18n="linksBlog">博客园</span></a>
     </div>
 
-    <div class="hint">点击工具栏的 The-Tab 图标，可替换此界面</div>
+    <div class="hint" data-i18n="hint">点击工具栏的 The-Tab 图标，可替换此界面</div>
   </div>
 
   <!-- 用户自定义 HTML 的渲染容器 -->
